@@ -20,6 +20,14 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 (autoload 'javascript-mode "javascript" nil t)
 
+;; coffeescript mode
+
+(add-to-list 'load-path "~/.emacs.d/elisp/coffee-mode")
+
+(require 'coffee-mode)
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("\\Cakefile" . coffee-mode))
+
 ;; load css mode
 
 (add-to-list 'auto-mode-alist '("\\.css" . css-mode))
@@ -43,15 +51,16 @@
 
 (require 'sass-mode)
 
+
 (add-to-list 'auto-mode-alist '("\\.scss$" . sass-mode))
 
 ;; kill the evil startup message before it takes over the world
 
-
 ; key-bindings stuffs
 
-;;(define-key ido-common-completion-map (kbd "C-p") 'ido-prev-match)
-;;(define-key ido-common-completion-map (kbd "C-n") 'ido-next-match)
+(eval-after-load 'tramp
+  '(progn (define-key ido-common-completion-map (kbd "C-p") 'ido-prev-match)
+          (define-key ido-common-completion-map (kbd "C-n") 'ido-next-match)))
 
 (setq inhibit-startup-message t)
 
@@ -110,15 +119,7 @@
 (package-initialize)
 
 
-;; ensime stuff
-
-(add-to-list 'load-path "~/.emacs.d/elpa/ensime_2.8.1-0.4.1/elisp/")
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-
-
 ;; custom, emacs-generated stuff below
-
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
@@ -126,6 +127,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(before-save-hook (quote (whitespace-cleanup)))
+ '(coffee-tab-width 2)
  '(global-linum-mode t)
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
@@ -133,7 +135,8 @@
  '(ido-save-directory-list-file "~/.emacs.d/tmp/ido.last")
  '(indent-tabs-mode nil)
  '(standard-indent 2)
- '(tab-stop-list (quote (2 4 6 8 10 12 14 16 18 20 22 24 26 28 30))))
+ '(tab-stop-list (quote (2 4 6 8 10 12 14 16 18 20 22 24 26 28 30)))
+ '(tab-width 2))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
