@@ -1,15 +1,21 @@
+;; load everything in elisp
+(add-to-list 'load-path "~/.emacs.d/elisp")
+(add-to-list 'load-path "~/.emacs.d/elpa")
+
 ;; package manager repos
 
-;;(require 'package)
-;;(mapc '(lambda (item) (add-to-list 'package-archives item))
-;;     '(("elpa" . "http://tromey.com/elpa/")
-;;       ("technomancy" . "http://repo.technomancy.us/emacs/")
-;;       ("marmalade" . "http://marmalade-repo.org/packages/")))
-;;(package-initialize)
+(require 'package)
+(mapc '(lambda (item) (add-to-list 'package-archives item))
+     '(("elpa" . "http://tromey.com/elpa/")
+       ("technomancy" . "http://repo.technomancy.us/emacs/")
+       ("marmalade" . "http://marmalade-repo.org/packages/")))
+(package-initialize)
 
-;; load everything in elisp
+;; mustache-mode
 
-(add-to-list 'load-path "~/.emacs.d/elisp")
+(add-to-list 'auto-mode-alist '("\\.mustache$" . mustache-mode))
+(add-to-list 'auto-mode-alist '("\\.handlebars$" . mustache-mode))
+(autoload 'mustache-mode "mustache-mode" "Major mode for editing Mustache files." t)
 
 ;; load nxhtml
 
@@ -23,10 +29,6 @@
 ;; coffeescript mode
 
 (add-to-list 'load-path "~/.emacs.d/elisp/coffee-mode")
-
-(require 'coffee-mode)
-(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
-(add-to-list 'auto-mode-alist '("\\Cakefile" . coffee-mode))
 
 ;; load css mode
 
